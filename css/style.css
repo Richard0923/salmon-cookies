@@ -1,5 +1,5 @@
-#salmon {
+img {
     animation-duration: 5s;
     animation-name: slidein;
     animation-iteration-count: infinite;
-}
+};
