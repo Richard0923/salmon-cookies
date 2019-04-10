@@ -3,3 +3,6 @@ img {
     animation-name: slidein;
     animation-iteration-count: infinite;
 };
+table, td{
+    border: 1px solid black;
+}
