@@ -7,6 +7,23 @@
     </head>
     <body>
         <h1>Cookie Stands</h1>
+        <form id="new-store">
+            <fieldset>
+                <legend>Add New Store</legend>
+                <label for="mincustomer">Minimum Customer</label>
+                <input id="mincustomer" type="number" required/>
+
+                <label for="maxcustomer">Maximum Customer</label>
+                <input id="maxcustomer" type="number" required/>
+
+                <label for="avgcookiesales">Average Cookie Sale</label>
+                <input id="avgcookiesales" type="number" required/>
+                
+                <label for="name">Store Name</label>
+                <input id="name" type="text" required/>
+                <button>Add Store</button>
+            </fieldset>
+        </form>
         <table id="cookies-stand">
         </table>
     </body>
