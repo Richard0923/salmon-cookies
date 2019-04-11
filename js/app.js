@@ -1,12 +1,11 @@
  'use strict';
 
- var locations = ['1st and pike',"SeaTac Airport", "Seattle Center", "Capitol Hill", "Alki"]
- var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12am', '1pm', '2pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
- 
+ var hours = ['6 am', '7 am', '8 am', '9 am', '10 am', '11 am', '12 am', '1 pm', '2 pm', '4 pm', '5 pm', '6 pm', '7 pm', '8 pm'];
+ var refTable = document.getElementById('cookies-stand');
  function getRandomNumber(min, max){ 
-    return Math.floor(Math.random() * (max - min) + min);
+    return Math.floor(Math.random() * (max - min + 1) + min);
  }
-
+ var finalTotal = [];
 
  function CookieStore(minCustomer, maxCustomer, avgCookieSale, id){
     this.minCustomer = minCustomer;
@@ -21,205 +20,72 @@
         return Math.round(this.randomCookiesPerHour() * this.avgCookieSale); 
     };
     this.render = function(){
-        var tr = document.createElement('tr');
-        var table = document.getElementById('hours-row');
-        table.append(tr);
-        var sum = 0; 
-        for(var i = 0; i < hours.length; i++){
-            var td = document.createElement('td');
-            //math
-            var consumption = this.cookieSold(); 
+        var sum = 0;
+        var trElement = document.createElement('tr');
+        var tdElement = document.createElement('td');
+        tdElement.textContent = this.id;
+        trElement.append(tdElement);
+        for(var i =0; i < hours.length; i++){
+            var consumption = this.cookieSold();
             sum += consumption;
             this.consumptionArray.push(consumption);
-            td.textContent = this.consumptionArray[i];
-            tr.append(td);
-        };
-        var cookieSoldTable = document.getElementById('num');
-        cookieSoldTable.append(tr);
-        
-        var totaltd = document.createElement('td');
-        var totaltr = document.createElement('tr');
-        totaltd.textContent = sum;
-        totaltr.append(totaltd);
-        //create a loop for locations so you can add them to the table
-        for(var i = 0; i < 5; i++){
-            var tr = document.createElement('tr');
-            th.textContent = locations[i];
-            tr.append(th);
-        };
-        var locationsrow = document.getElementById('locations');
-        locationsrow.append(tr);
+            tdElement = document.createElement('td');
+            tdElement.textContent = this.consumptionArray[i];
+            trElement.append(tdElement); 
+        }
+        var totalTd = document.createElement('td');
+        totalTd.textContent = sum;
+        finalTotal += sum;
+        trElement.append(totalTd);
+        refTable.append(trElement);
+        //hours header
+        //rows for locations 
     };
- };
+ 
+};
+
+function headerRender(){
+    var trHours = document.createElement('tr');
+    var thHours = document.createElement('th');
+    thHours.textContent = 'Stores';
+    trHours.append(thHours);
+    for(var i =0; i < hours.length; i++){
+        thHours = document.createElement('th');
+        thHours.textContent = hours[i];
+        trHours.append(thHours);
+    }
+    thHours = document.createElement('th');
+    thHours.textContent = 'Total of the day.';
+    trHours.append(thHours);
+    refTable.append(trHours);
+}
+
+headerRender();
+
+var firstandpike = new CookieStore(23, 65, 6.3, '1st and Pike');
+var seatac = new CookieStore(3, 24, 1.2, 'SeaTac Airport');
+var seattleCenter = new CookieStore(11, 38, 3.7, 'Seattle Center');
+var capitolHill = new CookieStore(20, 38, 2.3, 'Capitol Hill');
+var alki = new CookieStore(2, 16, 4.6, 'Alki');
+var locations = [firstandpike, seatac, seattleCenter, capitolHill, alki];
+for(var i = 0; i < locations.length; i++){
+    locations[i].render();
+}
+function totalRow(){
+    var tfTotal = document.createElement('tfoot');
+    var trTotal = document.createElement('tr');
+    tfTotal.textContent = 'Total';
+    
+    for(var i = 0; i < hours[i].length; i++){
+        for(var r = 0; r < locations[r].consumptionArray[i];){
+            finalTotal += locations.consumptionArray[r];
+        }
+
+    }
 
 
-
-
-var firstandpike = new CookieStore(23, 65, 6.3, 'first-and-pike');
-firstandpike.render();
-
-//
-//  var firstandpike = {
-//     minCustomer: 23,
-//     maxCustomer: 65,
-//     avgCookieSale: 6.3,
-//     consumptionArray: [],
-//     id: '1andpike',
-//     randomCookiesPerHour: function(){
-//         return getRandomNumber(this.minCustomer, this.maxCustomer);
-//     },
-//     cookiesSold: function(){
-//         return Math.round(this.randomCookiesPerHour() * this.avgCookieSale);
-//     },
-//     render: function(){
-//         var ulElement = document.getElementById(this.id);
-//         var sum = 0; 
-//         for(var i =0; i < hours.length; i++){
-//             var liElement = document.createElement('li');
-//             var consumption = this.cookiesSold(); 
-//             sum += consumption;
-//             this.consumptionArray.push(consumption);
-//             liElement.textContent = `At ${hours[i]}, we sold  ${consumption} cookies.`;
-//             ulElement.append(liElement);
-//         }
-
-//         var totalLi = document.createElement('li');
-//         totalLi.textContent = `Total is ${sum} cookies`;
-//         ulElement.append(totalLi);
-//     },
-//  };
-// firstandpike.randomCookiesPerHour();
-// firstandpike.cookiesSold();
-// firstandpike.render();
-
-// var seaTac = {
-//     minCustomer: 3,
-//     maxCustomer: 24,
-//     avgCookieSale: 1.2,
-//     consumptionArray: [],
-//     id: "seatac",
-//     randomCookiesPerHour: function(){
-//         return getRandomNumber(this.minCustomer, this.maxCustomer);
-//     },
-//     cookiesSold: function(){
-//         return Math.round(this.randomCookiesPerHour() * this.avgCookieSale);
-//     },
-//     render: function(){
-//         var ulElement = document.getElementById(this.id);
-//         var sum = 0; 
-//         for(var i =0; i < hours.length; i++){
-//             var liElement = document.createElement('li');
-//             var consumption = this.cookiesSold(); 
-//             sum += consumption;
-//             this.consumptionArray.push(consumption);
-//             liElement.textContent = `At ${hours[i]}, we sold  ${consumption} cookies.`;
-//             ulElement.append(liElement);
-//         }
-
-//         var totalLi = document.createElement('li');
-//         totalLi.textContent = `Total is ${sum} cookies`;
-//         ulElement.append(totalLi);
-//     },
-// };
-// seaTac.randomCookiesPerHour();
-// seaTac.cookiesSold();
-// seaTac.render();
-
-// var seattleCenter = {
-//     minCustomer: 11,
-//     maxCustomer: 38,
-//     avgCookieSale: 3.7,
-//     consumptionArray: [],
-//     id: "seattlecenter",
-//     randomCookiesPerHour: function(){
-//         return getRandomNumber(this.minCustomer, this.maxCustomer);
-//     },
-//     cookiesSold: function(){
-//         return Math.round(this.randomCookiesPerHour() * this.avgCookieSale);
-//     },
-//     render: function(){
-//         var ulElement = document.getElementById(this.id);
-//         var sum = 0; 
-//         for(var i =0; i < hours.length; i++){
-//             var liElement = document.createElement('li');
-//             var consumption = this.cookiesSold(); 
-//             sum += consumption;
-//             this.consumptionArray.push(consumption);
-//             liElement.textContent = `At ${hours[i]}, we sold  ${consumption} cookies.`;
-//             ulElement.append(liElement);
-//         }
-
-//         var totalLi = document.createElement('li');
-//         totalLi.textContent = `Total is ${sum} cookies`;
-//         ulElement.append(totalLi);
-//     },
-// };
-// seattleCenter.randomCookiesPerHour();
-// seattleCenter.cookiesSold();
-// seattleCenter.render();
-
-// var capitolHill = {
-//     minCustomer: 20,
-//     maxCustomer: 38,
-//     avgCookieSale: 2.3,
-//     consumptionArray: [],
-//     id: "capitolhill",
-//     randomCookiesPerHour: function(){
-//         return getRandomNumber(this.minCustomer, this.maxCustomer);
-//     },
-//     cookiesSold: function(){
-//         return Math.round(this.randomCookiesPerHour() * this.avgCookieSale);
-//     },
-//     render: function(){
-//         var ulElement = document.getElementById(this.id);
-//         var sum = 0; 
-//         for(var i =0; i < hours.length; i++){
-//             var liElement = document.createElement('li');
-//             var consumption = this.cookiesSold(); 
-//             sum += consumption;
-//             this.consumptionArray.push(consumption);
-//             liElement.textContent = `At ${hours[i]}, we sold  ${consumption} cookies.`;
-//             ulElement.append(liElement);
-//         }
-
-//         var totalLi = document.createElement('li');
-//         totalLi.textContent = `Total is ${sum} cookies`;
-//         ulElement.append(totalLi);
-//     },
-// };
-// capitolHill.randomCookiesPerHour();
-// capitolHill.cookiesSold();
-// capitolHill.render();
-
-// var alki = {
-//     minCustomer: 2,
-//     maxCustomer: 16,
-//     avgCookieSale: 4.6,
-//     consumptionArray: [],
-//     id: "alki",
-//     randomCookiesPerHour: function(){
-//         return getRandomNumber(this.minCustomer, this.maxCustomer);
-//     },
-//     cookiesSold: function(){
-//         return Math.round(this.randomCookiesPerHour() * this.avgCookieSale);
-//     },
-//     render: function(){
-//         var ulElement = document.getElementById(this.id);
-//         var sum = 0; 
-//         for(var i =0; i < hours.length; i++){
-//             var liElement = document.createElement('li');
-//             var consumption = this.cookiesSold(); 
-//             sum += consumption;
-//             this.consumptionArray.push(consumption);
-//             liElement.textContent = `At ${hours[i]}, we sold  ${consumption} cookies.`;
-//             ulElement.append(liElement);
-//         }
-
-//         var totalLi = document.createElement('li');
-//         totalLi.textContent = `Total is ${sum} cookies`;
-//         ulElement.append(totalLi);
-//     },
-// };
-// alki.randomCookiesPerHour();
-// alki.cookiesSold();
-// alki.render();
+    trTotal.append(tfTotal);
+    refTable.append(trTotal);
+}
+console.log(finalTotal);
+//totalRow();

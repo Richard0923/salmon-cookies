@@ -151,3 +151,67 @@ for(var i = 0; i < allDogs.length; i++) {
 }
 
 // VINICIO - AFTER YOU RENDER ALL THE DOGS, YOU CAN RENDER THE FINAL ROW
+
+//?fixed function 
+function CookieStore(minCustomer, maxCustomer, avgCookieSale, id){
+  this.minCustomer = minCustomer;
+  this.maxCustomer = maxCustomer;
+  this.avgCookieSale = avgCookieSale;
+  this.id = id;
+  this.consumptionArray = [];
+  this.randomCookiesPerHour = function(){
+      return getRandomNumber(this.minCustomer, this.maxCustomer);
+  };
+  this.cookieSold = function(){
+      return Math.round(this.randomCookiesPerHour() * this.avgCookieSale); 
+  };
+  this.render = function(){
+    var trElement = document.getElementById('num');
+    var sum = 0;
+    for(var i =0; i < hours.length; i++){
+      var tdElement = document.createElement('td');
+      var consumption = this.cookieSold();
+      sum += consumption;
+      this.consumptionArray.push(consumption);
+      tdElement.textContent = this.consumptionArray[i];
+      trElement.append(tdElement);
+    }
+
+
+
+
+
+    //bad code
+    this.render = function(){
+      var table = document.getElementById('hours-row');
+      var tr = document.createElement('tr');
+      table.append(tr);
+      var sum = 0; 
+      for(var i = 0; i < hours.length; i++){
+          var td = document.createElement('td');
+          //math
+          var consumption = this.cookieSold(); 
+          sum += consumption;
+          this.consumptionArray.push(consumption);
+          td.textContent = this.consumptionArray[i];
+          tr.append(td);
+      };
+      var cookieSoldTable = document.getElementById('num');
+      cookieSoldTable.append(tr);
+      
+      var totaltd = document.createElement('td');
+      var totaltr = document.createElement('tr');
+      totaltd.textContent = sum;
+      totaltr.append(totaltd);
+      //create a loop for locations so you can add them to the table
+      for(var i = 0; i < 5; i++){
+          var tr = document.createElement('tr');
+          th.textContent = locations[i];
+          tr.append(th);
+      };
+      var locationsrow = document.getElementById('locations');
+      locationsrow.append(tr);
+  };
+
+
+
