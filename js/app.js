@@ -33,6 +33,7 @@
             tdElement.textContent = this.consumptionArray[i];
             trElement.append(tdElement); 
         }
+        finalTotal += this.consumptionArray
         var totalTd = document.createElement('td');
         totalTd.textContent = sum;
         //finalTotal += sum;
@@ -61,13 +62,14 @@ function headerRender(){
 }
 
 headerRender();
-var locations = [
-    new CookieStore(23, 65, 6.3, '1st and Pike'),
-    new CookieStore(3, 24, 1.2, 'SeaTac Airport'),
-    new CookieStore(11, 38, 3.7, 'Seattle Center'),
-    new CookieStore(20, 38, 2.3, 'Capitol Hill'),
-    new CookieStore(2, 16, 4.6, 'Alki'),
-];    //var locations = [firstandpike, seatac, seattleCenter, capitolHill, alki];//maybe put this in the function so i can be more dynamic
+//var locations = [
+var firstandpike = new CookieStore(23, 65, 6.3, '1st and Pike');
+var seatac = new CookieStore(3, 24, 1.2, 'SeaTac Airport');
+var seattleCenter = new CookieStore(11, 38, 3.7, 'Seattle Center');
+var capitolHill = new CookieStore(20, 38, 2.3, 'Capitol Hill');
+var alki = new CookieStore(2, 16, 4.6, 'Alki');
+//];    
+var locations = [firstandpike, seatac, seattleCenter, capitolHill, alki];//maybe put this in the function so i can be more dynamic
 
 for(var i = 0; i < locations.length; i++){
     locations[i].render();
@@ -77,11 +79,11 @@ function totalRow(){
     var trTotal = document.createElement('tr');
     tfTotal.textContent = 'Total';
     
-    for(var i = 0; i < hours.length; i++){
+    for(var i = 0; i < hours.length ; i++){
         var hourlyTotal = 0;
         for(var r = 0; r < locations.length; i++){
-            hourlyTotal += locations[r].consumptionArray[i];
-        }
+            hourlyTotal += locations[i].consumptionArray[r];
+        };
         finalTotal += hourlyTotal;
         tfTotal = document.createElement('tfoot');
         tfTotal.textContent = hourlyTotal;
@@ -92,3 +94,4 @@ function totalRow(){
 }
 console.log(finalTotal);
 totalRow();
+//[""0""].consumptionArray
