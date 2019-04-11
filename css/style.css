@@ -1,8 +1,6 @@
-img {
-    animation-duration: 5s;
-    animation-name: slidein;
-    animation-iteration-count: infinite;
-};
-table, td{
+
+table, th, tr,td{
     border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
 }
