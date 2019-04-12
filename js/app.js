@@ -2,12 +2,15 @@
 
  var hours = ['6 am', '7 am', '8 am', '9 am', '10 am', '11 am', '12 am', '1 pm', '2 pm', '4 pm', '5 pm', '6 pm', '7 pm', '8 pm'];
  var refTable = document.getElementById('cookies-stand');
+ 
  function getRandomNumber(min, max){ 
     return Math.floor(Math.random() * (max - min + 1) + min);
  }
+
 var finalTotal = 0;
 var locations = [];
 var hourlyTotalArray = [];
+
 function CookieStore(minCustomer, maxCustomer, avgCookieSale, id){
     this.minCustomer = minCustomer;
     this.maxCustomer = maxCustomer;
@@ -15,12 +18,15 @@ function CookieStore(minCustomer, maxCustomer, avgCookieSale, id){
     this.id = id;
     this.consumptionArray = [];
     locations.push(this);
+
     this.randomCookiesPerHour = function(){
         return getRandomNumber(this.minCustomer, this.maxCustomer);
     };
+
     this.cookieSold = function(){
         return Math.round(this.randomCookiesPerHour() * this.avgCookieSale); 
     };
+
     this.render = function(){
         var sum = 0;
         var trElement = document.createElement('tr');
@@ -39,8 +45,7 @@ function CookieStore(minCustomer, maxCustomer, avgCookieSale, id){
         totalTd.textContent = sum;
         trElement.append(totalTd);
         refTable.append(trElement);
-        //hours header
-        //rows for locations 
+        
     };
  
 };
@@ -69,7 +74,7 @@ var seattleCenter = new CookieStore(11, 38, 3.7, 'Seattle Center');
 var capitolHill = new CookieStore(20, 38, 2.3, 'Capitol Hill');
 var alki = new CookieStore(2, 16, 4.6, 'Alki');
     
-//var locations = [firstandpike, seatac, seattleCenter, capitolHill, alki];//maybe put this in the function so i can be more dynamic
+
 
 for(var i = 0; i < locations.length; i++){
     locations[i].render();
