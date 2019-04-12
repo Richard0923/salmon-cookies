@@ -4,7 +4,11 @@
     float: inherit;
 }
 h1 {
-    text-align: center;
+    float: left;
+    text-align: left;
+    font-family: 'Oswald', sans-serif;
+    font-size: 46px;
+    margin: 10px 20px 20px 10px;
 }
 
 table, th, tr,td {
@@ -16,6 +20,7 @@ table, th, tr,td {
     margin-left:15%; 
     margin-right:15%;
     background-color: darkgray;
+    
 }
 fieldset {
     border: 1px solid black;
@@ -47,14 +52,32 @@ img {
 @keyframes slideout{
     from {
         margin-left: 0%;
-        width: 50%;
-        
+        width: 50%; 
       }
-    
       to {
         margin-left: 75%;
         width: 50%;
         animation-play-state: running; 
       }
     
+}
+#topbar {
+    padding: 0%;
+    position: fixed;
+    width: 100%;
+    height: 100px;
+}
+nav li {
+    display: inline-block;
+    padding: 15px 20px 0px 10px;
+    height: 35px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 22px;
+}
+  nav h1 {
+    float: left;
+    text-align: left;
+    font-family: 'Oswald', sans-serif;
+    font-size: 46px;
+    margin: 10px 20px 20px 10px;
 }
