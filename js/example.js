@@ -166,3 +166,11 @@ redGreenButton.addEventListener('click', onRedGreenButtonClick);
 grayButton.addEventListener('click', onGrayButtonClick);
 clearButton.addEventListener('click', onClearButtonClick);
  // ------------------------------------------------------------------------------------
+ referenceTable = document.getElementById('footer');
+  referenceTable.textContent = '';
+  grandTotal = 0;
+
+  newStore.dailySalesData();
+  calculateFooterTotals();
+  allStores.push(newStore);
+  

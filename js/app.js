@@ -104,7 +104,7 @@ function totalRow(){
     tfTotal.append(trTotal);
     refTable.append(tfTotal);
 }
-totalRow();
+
 
 function addNewStore(event){
     event.preventDefault();
@@ -117,7 +117,8 @@ function addNewStore(event){
     var newStore = new CookieStore(newMinCustomer, newMaxCustomer, newAvgCookieSale,newName);
     newStore.render();
     locations.push(newStore);
+    totalRow();
 }
 var cookieFormRef = document.getElementById('new-store');
 cookieFormRef.addEventListener('submit', addNewStore);
-
+totalRow();
