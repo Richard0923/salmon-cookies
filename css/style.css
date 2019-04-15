@@ -2,6 +2,7 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     background-color: salmon;
     float: inherit;
+    
 }
 h1 {
     float: left;
@@ -43,7 +44,7 @@ input {
 ul {
     margin: 1%;
 }
-img {
+#salmon {
     animation-duration: 3s;
     animation-name: slideout;
     animation-iteration-count: infinite;
@@ -81,6 +82,5 @@ nav li {
     font-size: 46px;
     margin: 10px 20px 20px 10px;
 }
-#newstoreform {
+
     
-}

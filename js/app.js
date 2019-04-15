@@ -115,9 +115,17 @@ function addNewStore(event){
     var newAvgCookieSale = event.target.avgcookiesales.value;
 
     var newStore = new CookieStore(newMinCustomer, newMaxCustomer, newAvgCookieSale,newName);
-    newStore.render();
-    locations.push(newStore);
+    
+    var newTable = document.getElementById('cookies-stand');
+    newTable.textContent = '';
+    headerRender();
+    for(var i = 0; i < locations.length; i++){
+        locations[i].render();
+    }
+    
     totalRow();
+
+    
 }
 var cookieFormRef = document.getElementById('new-store');
 cookieFormRef.addEventListener('submit', addNewStore);
